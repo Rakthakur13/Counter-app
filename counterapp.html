@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Counter App</title>
+
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial;
+            background-color: lightblue;
+            margin-top: 100px;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            width: 300px;
+            margin: auto;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: black;
+        }
+
+        #time {
+            font-size: 40px;
+            margin: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+        }
+
+        #start {
+            background: green;
+        }
+
+        #stop {
+            background: red;
+        }
+
+        #reset {
+            background: blue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Counter App</h1>
+
+        <div id="time">00:00:00</div>
+
+        <button id="start" onclick="start()">Start</button>
+        <button id="stop" onclick="stop()">Stop</button>
+        <button id="reset" onclick="reset()">Reset</button>
+    </div>
+
+    <script>
+        let seconds = 0;
+        let timer;
+
+        function showTime() {
+            let hrs = Math.floor(seconds / 3600);
+            let mins = Math.floor((seconds % 3600) / 60);
+            let secs = seconds % 60;
+
+            document.getElementById("time").innerHTML =
+                String(hrs).padStart(2, '0') + ":" +
+                String(mins).padStart(2, '0') + ":" +
+                String(secs).padStart(2, '0');
+        }
+
+        function start() {
+            if (!timer) {
+                timer = setInterval(function() {
+                    seconds++;
+                    showTime();
+                }, 1000);
+            }
+        }
+
+        function stop() {
+            clearInterval(timer);
+            timer = null;
+        }
+
+        function reset() {
+            clearInterval(timer);
+            timer = null;
+            seconds = 0;
+            showTime();
+        }
+    </script>
+
+</body>
+</html>
